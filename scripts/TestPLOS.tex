@@ -1,0 +1,342 @@
+% Template for PLoS
+% Version 3.5 March 2018
+%
+% % % % % % % % % % % % % % % % % % % % % %
+%
+% -- IMPORTANT NOTE
+%
+% This template contains comments intended
+% to minimize problems and delays during our production
+% process. Please follow the template instructions
+% whenever possible.
+%
+% % % % % % % % % % % % % % % % % % % % % % %
+%
+% Once your paper is accepted for publication,
+% PLEASE REMOVE ALL TRACKED CHANGES in this file
+% and leave only the final text of your manuscript.
+% PLOS recommends the use of latexdiff to track changes during review, as this will help to maintain a clean tex file.
+% Visit https://www.ctan.org/pkg/latexdiff?lang=en for info or contact us at latex@plos.org.
+%
+%
+% There are no restrictions on package use within the LaTeX files except that
+% no packages listed in the template may be deleted.
+%
+% Please do not include colors or graphics in the text.
+%
+% The manuscript LaTeX source should be contained within a single file (do not use \input, \externaldocument, or similar commands).
+%
+% % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- FIGURES AND TABLES
+%
+% Please include tables/figure captions directly after the paragraph where they are first cited in the text.
+%
+% DO NOT INCLUDE GRAPHICS IN YOUR MANUSCRIPT
+% - Figures should be uploaded separately from your manuscript file.
+% - Figures generated using LaTeX should be extracted and removed from the PDF before submission.
+% - Figures containing multiple panels/subfigures must be combined into one image file before submission.
+% For figure citations, please use "Fig" instead of "Figure".
+% See http://journals.plos.org/plosone/s/figures for PLOS figure guidelines.
+%
+% Tables should be cell-based and may not contain:
+% - spacing/line breaks within cells to alter layout or alignment
+% - do not nest tabular environments (no tabular environments within tabular environments)
+% - no graphics or colored text (cell background color/shading OK)
+% See http://journals.plos.org/plosone/s/tables for table guidelines.
+%
+% For tables that exceed the width of the text column, use the adjustwidth environment as illustrated in the example table in text below.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- EQUATIONS, MATH SYMBOLS, SUBSCRIPTS, AND SUPERSCRIPTS
+%
+% IMPORTANT
+% Below are a few tips to help format your equations and other special characters according to our specifications. For more tips to help reduce the possibility of formatting errors during conversion, please see our LaTeX guidelines at http://journals.plos.org/plosone/s/latex
+%
+% For inline equations, please be sure to include all portions of an equation in the math environment.
+%
+% Do not include text that is not math in the math environment.
+%
+% Please add line breaks to long display equations when possible in order to fit size of the column.
+%
+% For inline equations, please do not include punctuation (commas, etc) within the math environment unless this is part of the equation.
+%
+% When adding superscript or subscripts outside of brackets/braces, please group using {}.
+%
+% Do not use \cal for caligraphic font.  Instead, use \mathcal{}
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+%
+% Please contact latex@plos.org with any questions.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+% Use Unicode characters when possible
+\usepackage[utf8x]{inputenc}
+
+% textcomp package and marvosym package for additional characters
+\usepackage{textcomp,marvosym}
+
+% cite package, to clean up citations in the main text. Do not remove.
+% \usepackage{cite}
+
+% Use nameref to cite supporting information files (see Supporting Information section for more info)
+\usepackage{nameref,hyperref}
+
+% line numbers
+\usepackage[right]{lineno}
+
+% ligatures disabled
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% color can be used to apply background shading to table cells only
+\usepackage[table]{xcolor}
+
+% array package and thick rules for tables
+\usepackage{array}
+
+% create "+" rule type for thick vertical lines
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+
+% Remove comment for double spacing
+%\usepackage{setspace}
+%\doublespacing
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in
+\textheight 8.75in
+
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+\renewcommand{\figurename}{Fig}
+
+% Use the PLoS provided BiBTeX style
+% \bibliographystyle{plos2015}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+
+
+% Header and Footer with logo
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+%\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+%\setlength{\headheight}{27.023pt}
+%\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
+
+%% Include all macros below
+
+\newcommand{\lorem}{{\bf LOREM}}
+\newcommand{\ipsum}{{\bf IPSUM}}
+
+
+
+
+
+\usepackage{forarray}
+\usepackage{xstring}
+\newcommand{\getIndex}[2]{
+  \ForEach{,}{\IfEq{#1}{\thislevelitem}{\number\thislevelcount\ExitForEach}{}}{#2}
+}
+
+\setcounter{secnumdepth}{0}
+
+\newcommand{\getAff}[1]{
+  \getIndex{#1}{a,b}
+}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+\vspace*{0.2in}
+
+% Title must be 250 characters or less.
+\begin{flushleft}
+{\Large
+\textbf\newline{Example of a Transparent, Reproducible Research Manuscript} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+}
+\newline
+% Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
+\\
+Matthew J Parkes\textsuperscript{\getAff{a}, \getAff{b}}\textsuperscript{*}\\
+\bigskip
+\textbf{\getAff{a}}Centre for Epidemiology Versus Arthritis, Faculty of Biology, Medicine,
+and Health, Manchester Academic Health Science Centre, The University of
+Manchester, Manchester, UK.\\
+\textbf{\getAff{b}}NIHR Manchester Biomedical Research Centre, Manchester University NHS
+Foundation Trust, Manchester Academic Health Science Centre, Manchester,
+UK.\\
+\bigskip
+* Corresponding author: matthew.parkes@manchester.ac.uk\\
+\end{flushleft}
+% Please keep the abstract below 300 words
+\section*{Abstract}
+This paper is an example of how a fully transparent and reproducible
+research manuscript can be produced using the R packages
+\texttt{RMarkdown}, \texttt{rticles}, and \texttt{knitr}, written using
+RStudio, and compiled through \texttt{pandoc}. There are multiple other
+ways in which this output can be achieved, but this is a simple, easy
+way to generate manuscripts using one interface. The PLOS LaTeX article
+template (from the \texttt{rticles} package, originally adapted from
+{[}https://journals.plos.org/plosone/s/latex{]}) has been used only as a
+guide, but the \texttt{rticles} package allows options from other
+journals.\\
+
+% Please keep the Author Summary between 150 and 200 words
+% Use first person. PLOS ONE authors please skip this step.
+% Author Summary not valid for PLOS ONE submissions.
+
+\linenumbers
+
+% Use "Eq" instead of "Equation" for equation citations.
+\emph{.pdf format based on PLoS LaTeX sample manuscript, see
+\url{http://journals.plos.org/ploscompbiol/s/latex}, using
+\texttt{rticles} package}
+
+\hypertarget{preface}{%
+\section{Preface}\label{preface}}
+
+Typical word processing software is designed to write documents
+comprised of text, images, and tables all run together continuously.
+They use a WYSIWYG (`What you see is what you get') model for the
+interface, which means that the content of the document and the
+formatting are intertwined. This is to allow writers to change how the
+document looks in real-time whilst writing, and gives great flexibility
+in how a document can look.
+
+However, the advantages of using WYSIWYG word processing software does
+not benefit academic writing. Academic writing is a niche task: The
+formatting is usually irrelevant to the document's content (as this is
+usually controlled by journals), and manuscripts will almost always
+contain fixed structures such as the header and title information, an
+abstract, and some form of structured layout (e.g.~Introduction,
+Methods, Results, and Conclusion, as well as disclosures and/or
+acknowledgements). In addition, academic manuscripts contain other
+elements that word processing software alone cannot typically do:
+reference management, and analyses.
+
+This document demonstrates how a fully reproducible manuscript can be
+written in RMarkdown, a special purpose language that actually
+amalgamates two languages - R and Markdown - to allow analysts/writers
+to produce one continous document which interweaves structured formatted
+writing with live code which is executed when the document is compiled.
+
+The additional R package \texttt{knitr} compiles and runs the code, and
+in combination with the Pandoc syntax translation software, allows
+RMarkdown scripts to be compiled into a .pdf document, ready for
+publishing.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+This is an where you'd write the introduction. Citations can be easily
+entered using Markdown's syntax. For example, the original article from
+which the dataset used in this manuscript originates is cited
+here{[}1{]}. The original trial that generated the dataset used in this
+paper is cited here{[}2{]}.
+
+\hypertarget{doing-analyses-with-rmarkdown}{%
+\section{Doing Analyses with
+RMarkdown}\label{doing-analyses-with-rmarkdown}}
+
+It is possible to produce a `live' CONSORT diagram, however given time
+constraints, one is not included in this demonstation. It is hoped that
+a revised version of this paper will include one, generated entirely
+from the dataset and code.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+This is an example of a reproducible results section. The results
+included below are not copied and pasted from another source, but
+generated live from analysis code when the .pdf is compiled. The code
+for this table is written directly in the RMarkdown file, in a code
+`chunk'. Authors can control whether the code and output is displayed
+(by including \texttt{echo\ =\ TRUE} at the top of the code block), or
+just the output alone (by including \texttt{echo\ =\ FALSE} at the top
+instead, most likely the default for most publications).
+
+\begin{verbatim}
+## [1] "<table class=\"Rtable1\">\n<thead>\n<tr>\n<th class='rowlabel firstrow lastrow'></th>\n<th class='firstrow lastrow'><span class='stratlabel'>0<br><span class='stratn'>(n=140)</span></span></th>\n<th class='firstrow lastrow'><span class='stratlabel'>1<br><span class='stratn'>(n=161)</span></span></th>\n<th class='firstrow lastrow'><span class='stratlabel'>Total<br><span class='stratn'>(n=301)</span></span></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td class='rowlabel firstrow'><span class='varlabel'>age</span></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n</tr>\n<tr>\n<td class='rowlabel'>Mean (SD)</td>\n<td>46.2 (10.8)</td>\n<td>46.4 (10.0)</td>\n<td>46.3 (10.4)</td>\n</tr>\n<tr>\n<td class='rowlabel lastrow'>Median [Min, Max]</td>\n<td class='lastrow'>49.0 [18.0, 64.0]</td>\n<td class='lastrow'>48.0 [20.0, 65.0]</td>\n<td class='lastrow'>48.0 [18.0, 65.0]</td>\n</tr>\n<tr>\n<td class='rowlabel firstrow'><span class='varlabel'>sex</span></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n</tr>\n<tr>\n<td class='rowlabel'>0</td>\n<td>20 (14.3%)</td>\n<td>28 (17.4%)</td>\n<td>48 (15.9%)</td>\n</tr>\n<tr>\n<td class='rowlabel lastrow'>1</td>\n<td class='lastrow'>120 (85.7%)</td>\n<td class='lastrow'>133 (82.6%)</td>\n<td class='lastrow'>253 (84.1%)</td>\n</tr>\n<tr>\n<td class='rowlabel firstrow'><span class='varlabel'>migraine</span></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n</tr>\n<tr>\n<td class='rowlabel'>0</td>\n<td>8 (5.7%)</td>\n<td>9 (5.6%)</td>\n<td>17 (5.6%)</td>\n</tr>\n<tr>\n<td class='rowlabel lastrow'>1</td>\n<td class='lastrow'>132 (94.3%)</td>\n<td class='lastrow'>152 (94.4%)</td>\n<td class='lastrow'>284 (94.4%)</td>\n</tr>\n<tr>\n<td class='rowlabel firstrow'><span class='varlabel'>chronicity</span></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n<td class='firstrow'></td>\n</tr>\n<tr>\n<td class='rowlabel'>Mean (SD)</td>\n<td>21.9 (13.3)</td>\n<td>21.3 (14.5)</td>\n<td>21.6 (14.0)</td>\n</tr>\n<tr>\n<td class='rowlabel lastrow'>Median [Min, Max]</td>\n<td class='lastrow'>20.0 [2.00, 52.0]</td>\n<td class='lastrow'>20.0 [1.00, 54.0]</td>\n<td class='lastrow'>20.0 [1.00, 54.0]</td>\n</tr>\n</tbody>\n</table>\n"
+\end{verbatim}
+
+You can also create lists in Markdown: - Item 1 - Item 2 - Item 3 -
+Sub-item 1 - Sub-sub-item 1 - Sub-item 2
+
+\begin{table}[t]
+
+\caption{\label{tab:table2}Regression Model Output}
+\centering
+\begin{tabular}{l|r|r|r|r|r|r}
+\hline
+group & baseline\_mean & baseline\_sd & at3Months\_mean & at3Months\_sd & at12Months\_mean & at12Months\_sd\\
+\hline
+0 & 26.71 & 16.78 & NA & NaN & 22.34 & 17.01\\
+\hline
+1 & 24.58 & 14.12 & NA & NaN & 16.25 & 13.72\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Vickers2006}{}%
+1. Vickers AJ. Whose data set is it anyway? Sharing raw data from
+randomized trials. Trials. 2006;7: 15.
+doi:\href{https://doi.org/10.1186/1745-6215-7-15}{10.1186/1745-6215-7-15}
+
+\leavevmode\hypertarget{ref-Vickers2004}{}%
+2. Vickers AJ, Rees RW, Zollman CE, McCarney R, Smith CM, Ellis N, et
+al. Acupuncture for chronic headache in primary care: large, pragmatic,
+randomised trial. BMJ. 2004;328: 744.
+doi:\href{https://doi.org/10.1136/bmj.38029.421863.EB}{10.1136/bmj.38029.421863.EB}
+
+\nolinenumbers
+
+
+\end{document}
+

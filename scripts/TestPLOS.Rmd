@@ -1,0 +1,113 @@
+---
+title: Example of a Transparent, Reproducible Research Manuscript
+author:
+  - name: Matthew J Parkes
+    email: matthew.parkes@manchester.ac.uk
+    affiliation: [a,b]
+    corresponding: matthew.parkes@manchester.ac.uk
+    
+address:
+  - code: a
+    address: Centre for Epidemiology Versus Arthritis, Faculty of Biology, Medicine, and Health, Manchester Academic Health Science Centre, The University of Manchester, Manchester, UK.
+  - code: b
+    address: NIHR Manchester Biomedical Research Centre, Manchester University NHS Foundation Trust, Manchester Academic Health Science Centre, Manchester, UK.
+
+abstract: |
+  This paper is an example of how a fully transparent and reproducible research manuscript can be produced using the R packages `RMarkdown`, `rticles`, and `knitr`, written using RStudio, and compiled through `pandoc`. There are multiple other ways in which this output can be achieved, but this is a simple, easy way to generate manuscripts using one interface. The PLOS LaTeX article template (from the `rticles` package, originally adapted from [https://journals.plos.org/plosone/s/latex]) has been used only as a guide, but the `rticles` package allows options from other journals.  
+
+bibliography: "C:/Users/MJPar/OneDrive/Work/EBMLive 2019/40. Reprodicible, Transparent Research Manuscripts (Matt)/Demo Paper/example_lp_manuscript/write_up/TestPLOS/references/references.bib"
+output: rticles::plos_article
+
+csl: "C:/Users/MJPar/OneDrive/Work/EBMLive 2019/40. Reprodicible, Transparent Research Manuscripts (Matt)/Demo Paper/example_lp_manuscript/write_up/TestPLOS/style/plos.csl"
+---
+
+_.pdf format based on PLoS LaTeX sample manuscript, see [http://journals.plos.org/ploscompbiol/s/latex](http://journals.plos.org/ploscompbiol/s/latex), using `rticles` package_
+
+# Preface
+
+Typical word processing software is designed to write documents comprised of text, images, and tables all run together continuously. They use a WYSIWYG ('What you see is what you get') model for the interface, which means that the content of the document and the formatting are intertwined. This is to allow writers to change how the document looks in real-time whilst writing, and gives great flexibility in how a document can look.
+
+However, the advantages of using WYSIWYG word processing software does not benefit academic writing. Academic writing is a niche task: The formatting is usually irrelevant to the document's content (as this is usually controlled by journals), and manuscripts will almost always contain fixed structures such as the header and title information, an abstract, and some form of structured layout (e.g. Introduction, Methods, Results, and Conclusion, as well as disclosures and/or acknowledgements). In addition, academic manuscripts contain other elements that word processing software alone cannot typically do: reference management, and analyses. 
+
+This document demonstrates how a fully reproducible manuscript can be written in RMarkdown, a special purpose language that actually amalgamates two languages - R and Markdown - to allow analysts/writers to produce one continous document which interweaves structured formatted writing with live code which is executed when the document is compiled.
+
+The additional R package `knitr` compiles and runs the code, and in combination with the Pandoc syntax translation software, allows RMarkdown scripts to be compiled into a .pdf document, ready for publishing.
+
+# Introduction
+
+This is an where you'd write the introduction. Citations can be easily entered using Markdown's syntax. For example, the original article from which the dataset used in this manuscript originates is cited here[@Vickers2006]. The original trial that generated the dataset used in this paper is cited here[@Vickers2004].
+
+# Doing Analyses with RMarkdown
+
+It is possible to produce a 'live' CONSORT diagram, however given time constraints, one is not included in this demonstation. It is hoped that a revised version of this paper will include one, generated entirely from the dataset and code.
+
+# Results
+
+This is an example of a reproducible results section. The results included below are not copied and pasted from another source, but generated live from analysis code when the .pdf is compiled. The code for this table is written directly in the RMarkdown file, in a code 'chunk'. Authors can control whether the code and output is displayed (by including `echo = TRUE` at the top of the code block), or just the output alone (by including `echo = FALSE` at the top instead, most likely the default for most publications).
+
+``` {r requiredLibraries, include = FALSE}
+# Required libraries are listed here (you may also have to install them with install.packages() if you don't already have them):
+library(xlsx)
+library(tidyverse)
+library(table1)
+library(knitr)
+```
+
+
+``` {r table1, echo = FALSE}
+
+# Change working directory to the correct (you'll need to change this line to point to your directory)
+workingDir <- "C:/Users/MJPar/OneDrive/Work/EBMLive 2019/40. Reprodicible, Transparent Research Manuscripts (Matt)/Demo Paper/example_lp_manuscript/write_up/TestPLOS"
+
+# Pick up the study dataset
+dataset <- read.xlsx(paste(workingDir,"datasets/13063_2006_152_MOESM1_ESM.xls",sep = "/"),sheetName = "Data")
+
+# Examine the contents (not needed): 
+# str(dataset)
+
+# We'll need to do a little data cleanup here: encode the factor variables:
+toFactor <- c("sex",  "migraine", "acupuncturist", "group", "withdrawal_reason", "completedacupuncturetreatment", "completer", "response")
+dataset[toFactor] <- lapply(dataset[toFactor], as.factor)
+
+# Use the -table1- package to generate the descriptives table:
+# Limit analysis to only those that completed (as in Vickers paper):
+completers <- subset(dataset, completer == 1)  
+
+table1(~ age + sex + migraine + chronicity | group, data=completers, overall="Total", output = "latex2", caption = "Baseline characteristics. Values are numbers (percentages) of participants unless otherwise stated.")
+
+
+# This actually creates the table for the compiler. This step allows you to control the number of decimal places easily.
+# knitr::kable(digits = 2, caption = "Baseline characteristics. Values are numbers (percentages) of participants unless otherwise stated.")
+```
+
+<!--
+| Variable          | Mean | SD   |   |   |
+|-------------------|------|------|---|---|
+| Age               | 32.4 | 22.2 |   |   |
+| Pain Score (0-10) | 7    | 2.6  |   |   |
+| BMI               | 28.4 | 12.2 |   |   |
+
+-->
+
+You can also create lists in Markdown:
+- Item 1
+- Item 2
+- Item 3
+ - Sub-item 1
+  - Sub-sub-item 1
+ - Sub-item 2
+
+``` {r table2, echo = FALSE}
+out<- completers %>%
+      group_by(group) %>%
+      summarise(baseline_mean = mean(pk1), baseline_sd = sd(pk1), at3Months_mean = mean(pk2), at3Months_sd = sd(pk2), at12Months_mean = mean(pk5),at12Months_sd = sd(pk5))
+
+
+kable(out, digits = 2, caption = "Regression Model Output", format = "latex")
+```
+
+# Discussion
+
+This is an example of a discussion section.
+
+# References {#references .unnumbered}
